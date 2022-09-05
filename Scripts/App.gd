@@ -85,7 +85,7 @@ func _on_OpenFileDialog_files_selected(paths):
 	file_paths=paths
 	for i in paths:
 		names.append(i.get_file().get_basename())
-	selected_files.text=str(names)
+	selected_files.text=str(names.size())+" file(s) selected"
 	loadImages(paths)
 
 
@@ -98,7 +98,8 @@ func _on_Generate_pressed():
 	code+="{\n	 max-width: 100%;\n	background-size: 100%;\n	background-image: url();\n}\n\n"
 	
 	#generate image
-	final_height = total_height + ((images.size() - 1) * offset)
+#	final_height = total_height + ((images.size() - 1) * offset)
+	final_height = (1.5 * total_height) - int(float(sorted_images.back().get_height())/2)
 #	print(total_height)
 #	print(final_height)
 	final_img=Image.new()
@@ -118,7 +119,8 @@ func _on_Generate_pressed():
 		#final img generation
 		i.convert(Image.FORMAT_RGBA8)
 		final_img.blit_rect(i, Rect2(0,0,w,h), Vector2(0,y_offset))
-		y_offset += h + offset
+#		y_offset += h + offset
+		y_offset += h + int(float(h)/2)
 #	for img in images:
 #		var w = img.get_width()
 #		var h = img.get_height()
