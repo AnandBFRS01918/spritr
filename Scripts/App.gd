@@ -48,11 +48,11 @@ func loadImages(paths:PoolStringArray):
 	for el in images:
 		dict[el]=names[_i]
 		_i+=1
-	print(images)
+#	print(images)
 	sorted_images=images.duplicate(true)
 	sorted_images.sort_custom(CustomSorter,"sort_by_width")
-	print(sorted_images)
-	print(dict)
+#	print(sorted_images)
+#	print(dict)
 
 func _on_PickFiles_pressed():
 	open_file_dialog.popup()
@@ -112,7 +112,7 @@ func _on_Generate_pressed():
 		var temp = Image.new()
 		temp.create(w,h,false,Image.FORMAT_RGBA8)
 		code+="."+css_class_name+dict[i]+" {\n"
-		code+="	background-position: 0 "+str((float(y_offset)/(total_height-h))*100)+"%;\n	background-size: "+str((float(max_width)/w)*100)+"%;\n"
+		code+="	background-position: 0 "+str((float(y_offset)/(final_height-h))*100)+"%;\n	background-size: "+str((float(max_width)/w)*100)+"%;\n"
 		code+="	content: url('data:image/png;base64,"+ str(Marshalls.raw_to_base64(temp.save_png_to_buffer())) +"');"+'\n}\n\n'
 
 		#final img generation
