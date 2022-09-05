@@ -23,7 +23,8 @@ var save_path:String = ''
 var max_width=0
 var total_height=0
 var final_height=0
-var offset=0
+var lossy_quality=0
+var compress=false
 
 var code=''
 var css_class_name=""
@@ -121,23 +122,16 @@ func _on_Generate_pressed():
 		final_img.blit_rect(i, Rect2(0,0,w,h), Vector2(0,y_offset))
 #		y_offset += h + offset
 		y_offset += h + int(float(h)/2)
-#	for img in images:
-#		var w = img.get_width()
-#		var h = img.get_height()
-#
-#		var temp = Image.new()
-#		temp.create(w,h,false,Image.FORMAT_RGBA8)
-#
-#		img.convert(Image.FORMAT_RGBA8)
-#		final_img.blit_rect(img, Rect2(0,0,w,h), Vector2(0,y_offset))
-#		y_offset += h + offset
+	if compress:
+# warning-ignore:return_value_discarded
+		final_img.compress(Image.COMPRESS_S3TC, Image.COMPRESS_SOURCE_GENERIC, lossy_quality)
 # warning-ignore:return_value_discarded
 	final_img.save_png(save_path)
 	code_block.text=code
 
 
 func _on_SpinBox_value_changed(value):
-	offset=int(value)
+	lossy_quality=int(value)
 
 
 func _on_ClassName_text_changed(new_text):
@@ -146,3 +140,7 @@ func _on_ClassName_text_changed(new_text):
 
 func _on_CopyToClipboard_pressed():
 	OS.set_clipboard(code)
+
+
+func _on_CheckBox_toggled(button_pressed):
+	compress=button_pressed
