@@ -130,6 +130,7 @@ margin_top = 348.0
 margin_right = 470.0
 margin_bottom = 378.0
 split_offset = 420
+dragger_visibility = 1
 
 [node name="Label" type="Label" parent="MainPanel/VBoxContainer/HSplitContainer2"]
 margin_top = 3.0
