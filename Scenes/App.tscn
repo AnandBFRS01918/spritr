@@ -62,7 +62,6 @@ valign = 1
 margin_left = 63.0
 margin_right = 470.0
 margin_bottom = 34.0
-max_value = 25.0
 rounded = true
 
 [node name="Class" type="HSplitContainer" parent="MainPanel/VBoxContainer"]
